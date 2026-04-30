@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>炎上リスク可視化AI | ストーリーLPデモ</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <canvas id="storyCanvas" aria-label="WebGL風ストーリー表現"></canvas>
+      <div class="hero-overlay">
+        <p class="eyebrow">REAL-TIME RISK MONITORING</p>
+        <h1>炎上の流れを、<span>体験</span>で理解する。</h1>
+        <p class="lead">火種 → 拡散 → AI検知 → 可視化 → 対応まで、画面上で追体験できるストーリーLPデモです。</p>
+
+        <div class="segment-switch" role="tablist" aria-label="LP分岐">
+          <button class="tab active" data-segment="enterprise">企業向け</button>
+          <button class="tab" data-segment="store">店舗向け</button>
+        </div>
+        <p class="segment-copy" id="segmentCopy">全社横断のレピュテーション監視と初動体制を、AIで高速化します。</p>
+
+        <div class="phase-track" id="phaseTrack" aria-live="polite"></div>
+
+        <form class="quick-form" id="quickForm">
+          <input id="company" type="text" placeholder="会社名" required />
+          <input id="email" type="email" placeholder="メールアドレス" required />
+          <button class="primary" type="submit">無料診断を開始</button>
+        </form>
+        <small id="formMessage" class="form-message"></small>
+      </div>
+
+      <aside class="dashboard">
+        <h2>監視ダッシュボード</h2>
+        <div class="metric"><span>危険スコア</span><strong id="score">32</strong></div>
+        <div class="metric"><span>業界平均</span><strong id="industryAvg">45</strong></div>
+        <div class="metric"><span>拡散件数</span><strong id="volume">148</strong></div>
+        <div class="metric"><span>高危険ノード</span><strong id="danger">7</strong></div>
+
+        <h3>危険度ランキング</h3>
+        <ol id="ranking" class="ranking"></ol>
+
+        <h3>検知フィード</h3>
+        <ul id="feed"></ul>
+      </aside>
+    </header>
+
+    <main>
+      <section class="steps">
+        <article><h3>① 火種</h3><p>SNS・口コミ・掲示板を粒子化。リスク投稿を赤色でハイライト。</p></article>
+        <article><h3>② 拡散</h3><p>ネットワーク拡散を可視化し、早期検知の必要性を訴求。</p></article>
+        <article><h3>③ AI検知</h3><p>シアンのスキャンラインで高危険粒子を識別・吸着。</p></article>
+        <article><h3>④ 可視化</h3><p>リスクをスコア化し、件数や比較値で意思決定を支援。</p></article>
+        <article><h3>⑤ 対応</h3><p>レポート・対応テンプレ・コンサル導線でCVへ接続。</p></article>
+      </section>
+
+      <section class="cards">
+        <article>
+          <h2>投稿サンプル（実データ風）</h2>
+          <ul class="sample-posts" id="samplePosts"></ul>
+        </article>
+        <article>
+          <h2>次の強化ポイント</h2>
+          <ul>
+            <li>危険度ランキングのドリルダウン</li>
+            <li>フォーム送信後の2stepヒアリング</li>
+            <li>検索結果風ビューへの切替</li>
+            <li>SaaS管理画面へのシームレス遷移</li>
+          </ul>
+        </article>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
