@@ -11,6 +11,9 @@ const samplePostsEl = document.getElementById("samplePosts");
 const segmentCopyEl = document.getElementById("segmentCopy");
 const quickForm = document.getElementById("quickForm");
 const formMessage = document.getElementById("formMessage");
+const shareLinkEl = document.getElementById("shareLink");
+const copyLinkBtn = document.getElementById("copyLink");
+const shareMessageEl = document.getElementById("shareMessage");
 
 const phases = ["火種", "拡散", "AI検知", "可視化", "対応"];
 const segmentCopy = {
@@ -33,13 +36,14 @@ const samplePosts = [
   "検索: ブランド名＋炎上の関連クエリが上昇"
 ];
 
-const rankingSeeds = ["接客対応", "品質不具合", "配送遅延", "価格表記", "広告表現"]; 
+const rankingSeeds = ["接客対応", "品質不具合", "配送遅延", "価格表記", "広告表現"];
 
 let w = 0;
 let h = 0;
 let t = 0;
 let phaseIndex = 0;
 let phaseTimer = 0;
+let currentSegment = "enterprise";
 
 const particles = Array.from({ length: 210 }, () => ({
   x: Math.random(),
@@ -57,8 +61,40 @@ function resize() {
   canvas.height = h * dpr;
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
+
+function updateShareLink() {
+  const url = new URL(window.location.href);
+  url.searchParams.set("segment", currentSegment);
+  url.searchParams.set("phase", String(phaseIndex));
+  shareLinkEl.value = url.toString();
+}
+
+function applyStateToUrl() {
+  const url = new URL(window.location.href);
+  url.searchParams.set("segment", currentSegment);
+  url.searchParams.set("phase", String(phaseIndex));
+  history.replaceState({}, "", `${url.pathname}?${url.searchParams.toString()}`);
+  updateShareLink();
+}
+
+function hydrateFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const segment = params.get("segment");
+  const phase = Number(params.get("phase"));
+  if (segment === "enterprise" || segment === "store") currentSegment = segment;
+  if (Number.isInteger(phase) && phase >= 0 && phase < phases.length) phaseIndex = phase;
+}
+
+function syncSegmentUi() {
+  document.querySelectorAll(".tab").forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.segment === currentSegment);
+  });
+  segmentCopyEl.textContent = segmentCopy[currentSegment] || segmentCopy.enterprise;
+}
+
 window.addEventListener("resize", resize);
 resize();
+hydrateFromUrl();
 
 function renderPhaseTrack() {
   phaseTrackEl.innerHTML = "";
@@ -104,6 +140,7 @@ function animate() {
     phaseIndex = (phaseIndex + 1) % phases.length;
     updateFeed(phases[phaseIndex]);
     renderPhaseTrack();
+    applyStateToUrl();
   }
   const phase = phases[phaseIndex];
 
@@ -161,10 +198,19 @@ function animate() {
 
 document.querySelectorAll(".tab").forEach((btn) => {
   btn.addEventListener("click", () => {
-    document.querySelectorAll(".tab").forEach((b) => b.classList.remove("active"));
-    btn.classList.add("active");
-    segmentCopyEl.textContent = segmentCopy[btn.dataset.segment] || segmentCopy.enterprise;
+    currentSegment = btn.dataset.segment || "enterprise";
+    syncSegmentUi();
+    applyStateToUrl();
   });
+});
+
+copyLinkBtn.addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText(shareLinkEl.value);
+    shareMessageEl.textContent = "確認リンクをコピーしました。";
+  } catch {
+    shareMessageEl.textContent = "コピーに失敗しました。手動でリンクをコピーしてください。";
+  }
 });
 
 quickForm.addEventListener("submit", (event) => {
@@ -179,7 +225,9 @@ quickForm.addEventListener("submit", (event) => {
   quickForm.reset();
 });
 
+syncSegmentUi();
 renderPhaseTrack();
 renderSamplePosts();
 updateFeed(phases[phaseIndex]);
+applyStateToUrl();
 animate();

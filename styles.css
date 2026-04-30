@@ -56,3 +56,12 @@ main { padding: 26px 6vw 72px; }
 @media (max-width: 760px) {
   .quick-form { grid-template-columns: 1fr; }
 }
+
+
+.share-box { margin-top: 14px; border: 1px solid var(--line); border-radius: 12px; padding: 12px; background: rgba(15, 23, 42, 0.65); max-width: 720px; }
+.share-box h3 { margin: 0 0 6px; font-size: 0.95rem; color: #bae6fd; }
+.share-box p { margin: 0 0 8px; color: var(--muted); font-size: 0.88rem; }
+.share-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+.share-row input { background: rgba(15, 23, 42, 0.75); border: 1px solid var(--line); color: var(--text); border-radius: 10px; padding: 10px; }
+.share-row button { background: rgba(148, 163, 184, 0.18); color: white; border: 1px solid rgba(255,255,255,0.1); }
+.share-message { display: block; margin-top: 6px; min-height: 1.2em; color: #7dd3fc; }
