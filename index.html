@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>炎上リスク可視化AI | ランディングページ</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container nav">
+        <strong class="logo">RepuGuard AI</strong>
+        <a href="#contact" class="btn btn-ghost">無料相談</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">REPUTATION RISK MONITORING</p>
+          <h1>炎上を<span>起きる前に</span>検知する。</h1>
+          <p class="lead">SNS・口コミ・掲示板を横断監視し、危険投稿の兆候をAIで早期発見。拡散前の初動対応を支援します。</p>
+          <div class="cta-row">
+            <a href="#contact" class="btn btn-primary">無料診断を申し込む</a>
+            <a href="#features" class="btn btn-outline">機能を見る</a>
+          </div>
+          <ul class="badges">
+            <li>24時間監視</li>
+            <li>業界平均比較</li>
+            <li>対応テンプレ自動生成</li>
+          </ul>
+        </div>
+        <aside class="panel">
+          <h2>本日のリスクサマリー</h2>
+          <div class="metric"><span>危険スコア</span><strong>68</strong></div>
+          <div class="metric"><span>業界平均</span><strong>45</strong></div>
+          <div class="metric"><span>高危険投稿</span><strong>12件</strong></div>
+          <div class="metric"><span>対応推奨</span><strong>3件</strong></div>
+          <hr />
+          <p class="small">※ デモ表示です。実運用では貴社データに合わせて算出されます。</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <div class="container">
+        <h2>選ばれる理由</h2>
+        <div class="cards">
+          <article>
+            <h3>① 兆候検知</h3>
+            <p>否定的投稿の増加・関連ワード急騰・拡散速度をAIが自動判定します。</p>
+          </article>
+          <article>
+            <h3>② 可視化</h3>
+            <p>危険スコア、拡散経路、優先度ランキングを一画面で確認できます。</p>
+          </article>
+          <article>
+            <h3>③ 初動支援</h3>
+            <p>炎上タイプ別に、謝罪文・社内共有文・対応フローを即時提案します。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container two-col">
+        <div>
+          <h2>導入効果</h2>
+          <ul class="list">
+            <li>検知までの時間を最短10分に短縮</li>
+            <li>拡散前対応率を平均2.3倍に改善</li>
+            <li>現場判断の属人化を解消</li>
+          </ul>
+        </div>
+        <div>
+          <h2>対応業種</h2>
+          <ul class="list">
+            <li>小売 / EC</li>
+            <li>飲食 / 多店舗運営</li>
+            <li>toCサービス / サブスク</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container contact">
+        <h2>無料診断を申し込む</h2>
+        <p>まずは会社名とメールだけでOK。担当者より24時間以内にご連絡します。</p>
+        <form id="leadForm" class="form">
+          <input id="company" type="text" placeholder="会社名" required />
+          <input id="email" type="email" placeholder="メールアドレス" required />
+          <button type="submit" class="btn btn-primary">送信する</button>
+        </form>
+        <small id="formMessage" aria-live="polite"></small>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">© 2026 RepuGuard AI</div>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
