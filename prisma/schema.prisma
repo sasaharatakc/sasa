@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  projects  Project[]
+  createdAt DateTime  @default(now())
+}
+
+model Project {
+  id          String                 @id @default(cuid())
+  name        String
+  websiteUrl  String
+  userId      String
+  user        User                   @relation(fields: [userId], references: [id])
+  analyses    SiteAnalysis[]
+  competitors Competitor[]
+  directions  DirectionMap[]
+  runs        GeneratorRun[]
+  checklists  ChecklistItem[]
+  createdAt   DateTime               @default(now())
+}
+
+model SiteAnalysis { id String @id @default(cuid()) projectId String project Project @relation(fields:[projectId], references:[id]) data Json createdAt DateTime @default(now()) }
+model Competitor { id String @id @default(cuid()) projectId String project Project @relation(fields:[projectId], references:[id]) name String url String type String reason String tags String[] preferences CompetitorPreference[] }
+model CompetitorPreference { id String @id @default(cuid()) competitorId String competitor Competitor @relation(fields:[competitorId], references:[id]) action String createdAt DateTime @default(now()) }
+model DirectionMap { id String @id @default(cuid()) projectId String project Project @relation(fields:[projectId], references:[id]) data Json createdAt DateTime @default(now()) }
+model GeneratorRun { id String @id @default(cuid()) projectId String project Project @relation(fields:[projectId], references:[id]) generatorType String style String output Json assets GeneratedAsset[] createdAt DateTime @default(now()) }
+model GeneratedAsset { id String @id @default(cuid()) runId String run GeneratorRun @relation(fields:[runId], references:[id]) assetType String content Json }
+model ChecklistItem { id String @id @default(cuid()) projectId String project Project @relation(fields:[projectId], references:[id]) category String item String done Boolean @default(false) }
