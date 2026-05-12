@@ -1,0 +1,166 @@
+:root {
+  --bg: #061228;
+  --surface: #0d1f3a;
+  --surface-2: #13294d;
+  --text: #e8f0ff;
+  --muted: #aab7d4;
+  --primary: #4f8cff;
+  --accent: #6ee7d8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+  background: linear-gradient(180deg, #061228 0%, #091a34 100%);
+  color: var(--text);
+  line-height: 1.7;
+}
+
+.container {
+  width: min(1080px, calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+.hero {
+  padding: 1.2rem 0 5rem;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.hero-content {
+  padding-top: 4rem;
+}
+
+.tag {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.2;
+  margin: 0.2rem 0 1rem;
+}
+
+h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  margin-bottom: 1.2rem;
+}
+
+.lead {
+  color: var(--muted);
+  max-width: 60ch;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-top: 1.6rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.74rem 1.1rem;
+  border-radius: 0.7rem;
+  text-decoration: none;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-outline,
+.btn-ghost {
+  color: var(--text);
+  border-color: #3a4d76;
+  background: transparent;
+}
+
+.section {
+  padding: 4rem 0;
+}
+
+.alt {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.grid.three {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.card,
+.panel,
+.contact-form {
+  background: var(--surface);
+  border: 1px solid #21345b;
+  border-radius: 0.9rem;
+  padding: 1rem;
+}
+
+.split {
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: 1.4fr 1fr;
+}
+
+.benefits li {
+  margin-bottom: 0.8rem;
+}
+
+.kicker {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.contact-form {
+  display: grid;
+  gap: 0.9rem;
+  max-width: 680px;
+}
+
+label {
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+}
+
+input,
+textarea {
+  border: 1px solid #2c4067;
+  background: var(--surface-2);
+  color: var(--text);
+  border-radius: 0.6rem;
+  padding: 0.7rem 0.8rem;
+}
+
+.footer {
+  border-top: 1px solid #1f3052;
+  padding: 1.4rem 0;
+  color: var(--muted);
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .split {
+    grid-template-columns: 1fr;
+  }
+}
