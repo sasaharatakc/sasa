@@ -56,6 +56,27 @@ npm install
 npm run dev      # http://localhost:3000
 ```
 
+## Docker (auto-start)
+
+A production image (Next.js **standalone** output) with an auto-restart
+container is provided. The host port is the first free 3000-range port found at
+setup time (**3000**); override it with `HOST_PORT`.
+
+```bash
+docker compose up -d --build     # build + start in the background
+# open http://localhost:3000
+
+HOST_PORT=3005 docker compose up -d --build   # use a different host port
+docker compose logs -f           # tail logs
+docker compose down              # stop & remove
+```
+
+- `restart: unless-stopped` — the container starts automatically on Docker
+  daemon boot and after a crash, until you explicitly stop it.
+- The container listens on `3000` internally (`PORT` / `HOSTNAME=0.0.0.0`);
+  compose maps `${HOST_PORT:-3000}` → `3000`.
+- A `healthcheck` polls the app so orchestration can see readiness.
+
 ## Scripts
 
 ```bash
