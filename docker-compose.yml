@@ -1,0 +1,22 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: asle-immersive:latest
+    container_name: asle-immersive
+    # Auto-start on boot / after a crash (restarts unless you explicitly stop it).
+    restart: unless-stopped
+    # Host port is the first free 3000-range port found at setup time (3000),
+    # overridable via HOST_PORT; container always listens on 3000.
+    ports:
+      - "${HOST_PORT:-3000}:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:3000"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s

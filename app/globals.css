@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Fraunces', 'Georgia', 'Times New Roman', serif;
+
+  --teal: #0f9b8e;
+  --teal-deep: #0a6b62;
+  --aqua: #7fded1;
+  --aqua-light: #c9f3ec;
+  --navy: #0d2b34;
+  --mist: #f4faf9;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis handles smooth scrolling */
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  background: var(--mist);
+  color: var(--navy);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Selection */
+::selection {
+  background: var(--aqua);
+  color: var(--navy);
+}
+
+/* Utility: hide scrollbar for horizontal tracks that GSAP drives */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Fine dotted grid backdrop used in scientific scenes */
+.grid-backdrop {
+  background-image: radial-gradient(
+    rgba(15, 155, 142, 0.14) 1px,
+    transparent 1px
+  );
+  background-size: 34px 34px;
+}
+
+/* Soft radial glow */
+.radial-glow {
+  background: radial-gradient(
+    closest-side,
+    rgba(127, 222, 209, 0.55),
+    rgba(127, 222, 209, 0) 70%
+  );
+}
+
+/* Reduced-motion: neutralise transform-heavy scenes */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
