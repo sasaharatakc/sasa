@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import { gsap } from '@/lib/gsap';
 import { useReducedMotion } from '@/lib/useReducedMotion';
+import { useI18n } from '@/lib/i18n';
 import { Capsule } from './visuals/Capsule';
 
 /**
@@ -13,6 +14,7 @@ import { Capsule } from './visuals/Capsule';
 export function CapsuleScene() {
   const root = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
+  const { m } = useI18n();
 
   useLayoutEffect(() => {
     if (reduced || !root.current) return;
@@ -104,15 +106,12 @@ export function CapsuleScene() {
           className="absolute bottom-16 left-1/2 max-w-xl -translate-x-1/2 px-6 text-center"
         >
           <p className="mb-2 text-xs font-semibold uppercase tracking-wider2 text-teal-deep">
-            02 — Inside every capsule
+            {m.capsule.eyebrow}
           </p>
           <h2 className="font-display text-3xl font-semibold text-navy sm:text-4xl">
-            Precision from the inside out
+            {m.capsule.title}
           </h2>
-          <p className="mt-3 text-navy/70">
-            Every formulation is engineered granule by granule — the science
-            that sits behind dependable, effective medicine.
-          </p>
+          <p className="mt-3 text-navy/70">{m.capsule.desc}</p>
         </div>
       </div>
     </section>

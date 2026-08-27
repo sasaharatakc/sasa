@@ -11,15 +11,10 @@ import {
 } from 'lucide-react';
 import { gsap } from '@/lib/gsap';
 import { useReducedMotion } from '@/lib/useReducedMotion';
+import { useI18n } from '@/lib/i18n';
 
-const AREAS = [
-  { icon: Brain, title: 'Neurology', jp: '神経', desc: 'Central nervous system therapies.' },
-  { icon: HeartPulse, title: 'Cardiology', jp: '循環器', desc: 'Cardiovascular care formulations.' },
-  { icon: Wind, title: 'Respiratory', jp: '呼吸器', desc: 'Airway and pulmonary support.' },
-  { icon: Pill, title: 'Gastro', jp: '消化器', desc: 'Digestive and gastro health.' },
-  { icon: Droplet, title: 'Diabetes', jp: '糖尿病', desc: 'Metabolic and glucose management.' },
-  { icon: Sparkles, title: 'Dermatology', jp: '皮膚科', desc: 'Skin and topical treatments.' },
-];
+// Icons stay language-agnostic; text comes from i18n (matched by index).
+const AREA_ICONS = [Brain, HeartPulse, Wind, Pill, Droplet, Sparkles];
 
 /**
  * 05 — THERAPEUTIC AREAS. Vertical scroll is converted into horizontal travel
@@ -30,6 +25,7 @@ export function TherapeuticAreasScene() {
   const root = useRef<HTMLElement>(null);
   const track = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
+  const { m } = useI18n();
 
   useLayoutEffect(() => {
     if (reduced || !root.current || !track.current) return;
@@ -79,10 +75,10 @@ export function TherapeuticAreasScene() {
       <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
         <div className="mx-auto mb-8 w-full max-w-7xl px-6 sm:px-10">
           <p className="mb-2 text-xs font-semibold uppercase tracking-wider2 text-teal-deep">
-            05 — Therapeutic Areas
+            {m.therapeutic.eyebrow}
           </p>
           <h2 className="font-display text-4xl font-semibold text-navy sm:text-5xl">
-            Broad therapeutic coverage
+            {m.therapeutic.title}
           </h2>
         </div>
 
@@ -90,8 +86,8 @@ export function TherapeuticAreasScene() {
           ref={track}
           className="flex items-center gap-6 px-[8vw] will-change-transform sm:gap-8"
         >
-          {AREAS.map((a) => {
-            const Icon = a.icon;
+          {m.therapeutic.areas.map((a, i) => {
+            const Icon = AREA_ICONS[i];
             return (
               <article
                 key={a.title}
@@ -103,7 +99,7 @@ export function TherapeuticAreasScene() {
                 </div>
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wider2 text-teal-deep">
-                    {a.jp}
+                    {a.sub}
                   </p>
                   <h3 className="mt-1 font-display text-3xl font-semibold text-navy">
                     {a.title}
@@ -116,7 +112,7 @@ export function TherapeuticAreasScene() {
         </div>
 
         <p className="mx-auto mt-8 w-full max-w-7xl px-6 text-sm text-navy/50 sm:px-10">
-          Scroll to move sideways →
+          {m.therapeutic.hint}
         </p>
       </div>
     </section>

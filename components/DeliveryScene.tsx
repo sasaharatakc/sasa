@@ -4,13 +4,9 @@ import { useLayoutEffect, useRef } from 'react';
 import { Package, Truck, Plane, Globe2 } from 'lucide-react';
 import { gsap } from '@/lib/gsap';
 import { useReducedMotion } from '@/lib/useReducedMotion';
+import { useI18n } from '@/lib/i18n';
 
-const STEPS = [
-  { icon: Package, label: 'Package' },
-  { icon: Truck, label: 'Transport' },
-  { icon: Plane, label: 'Export' },
-  { icon: Globe2, label: 'World' },
-];
+const STEP_ICONS = [Package, Truck, Plane, Globe2];
 
 /**
  * 11 — GLOBAL DELIVERY. The emotional peak. A journey (package → transport →
@@ -20,6 +16,7 @@ const STEPS = [
 export function DeliveryScene() {
   const root = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
+  const { m } = useI18n();
 
   useLayoutEffect(() => {
     if (reduced || !root.current) return;
@@ -79,22 +76,21 @@ export function DeliveryScene() {
         {/* Copy */}
         <div data-del="copy" className="relative z-10 px-6 text-center">
           <p className="mb-4 text-xs font-semibold uppercase tracking-wider2 text-aqua">
-            11 — Global Delivery
+            {m.delivery.eyebrow}
           </p>
           <h2 className="font-display text-5xl font-semibold leading-[1.05] sm:text-6xl lg:text-7xl">
-            Delivering Health.
+            {m.delivery.title1}
             <br />
-            <span className="text-aqua">Delivering Hope.</span>
+            <span className="text-aqua">{m.delivery.title2}</span>
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg text-white/75">
-            Medicines reaching partners and patients across the world — the
-            message of health and hope, carried everywhere we go.
+            {m.delivery.lead}
           </p>
 
           {/* Journey steps */}
           <div className="mt-10 flex items-center justify-center gap-6">
-            {STEPS.map((s) => {
-              const Icon = s.icon;
+            {m.delivery.steps.map((s, i) => {
+              const Icon = STEP_ICONS[i];
               return (
                 <div key={s.label} data-del="step" className="flex flex-col items-center gap-2">
                   <div className="flex h-14 w-14 items-center justify-center rounded-full border border-white/15 bg-white/[0.08]">
@@ -110,7 +106,7 @@ export function DeliveryScene() {
             href="#contact"
             className="mt-10 inline-flex rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-teal-deep shadow-lg transition-transform hover:scale-[1.03]"
           >
-            お問い合わせ / Contact Us
+            {m.delivery.cta}
           </a>
         </div>
       </div>

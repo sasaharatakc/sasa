@@ -4,13 +4,9 @@ import { useLayoutEffect, useRef } from 'react';
 import { ShieldCheck, FlaskConical, ClipboardCheck, Fingerprint } from 'lucide-react';
 import { gsap } from '@/lib/gsap';
 import { useReducedMotion } from '@/lib/useReducedMotion';
+import { useI18n } from '@/lib/i18n';
 
-const PILLARS = [
-  { icon: ShieldCheck, title: 'WHO-GMP', desc: 'Good Manufacturing Practice.' },
-  { icon: FlaskConical, title: 'Quality Control', desc: 'In-process & final testing.' },
-  { icon: ClipboardCheck, title: 'Stability Testing', desc: 'Shelf-life assurance.' },
-  { icon: Fingerprint, title: 'Traceability', desc: 'Batch-level accountability.' },
-];
+const PILLAR_ICONS = [ShieldCheck, FlaskConical, ClipboardCheck, Fingerprint];
 
 /**
  * 07 — QUALITY. The mood shifts to the manufacturing & QC world. A framed
@@ -20,6 +16,7 @@ const PILLARS = [
 export function QualityScene() {
   const root = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
+  const { m } = useI18n();
 
   useLayoutEffect(() => {
     if (reduced || !root.current) return;
@@ -72,21 +69,17 @@ export function QualityScene() {
         <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-6 sm:px-10 lg:grid-cols-2">
           <div data-q="copy" className="text-white">
             <p className="mb-3 text-xs font-semibold uppercase tracking-wider2 text-aqua">
-              07 — Quality
+              {m.quality.eyebrow}
             </p>
             <h2 className="font-display text-4xl font-semibold leading-tight sm:text-5xl">
-              Quality assured, end to end
+              {m.quality.title}
             </h2>
-            <p className="mt-5 max-w-md text-lg text-white/75">
-              From incoming materials to finished packs, rigorous quality control
-              underpins every batch — the foundation of trust in pharmaceutical
-              manufacturing.
-            </p>
+            <p className="mt-5 max-w-md text-lg text-white/75">{m.quality.lead}</p>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            {PILLARS.map((p) => {
-              const Icon = p.icon;
+            {m.quality.pillars.map((p, i) => {
+              const Icon = PILLAR_ICONS[i];
               return (
                 <div
                   key={p.title}

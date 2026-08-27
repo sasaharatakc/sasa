@@ -4,14 +4,9 @@ import { useLayoutEffect, useRef } from 'react';
 import { DoorOpen, Factory, ClipboardCheck, Boxes, Warehouse } from 'lucide-react';
 import { gsap } from '@/lib/gsap';
 import { useReducedMotion } from '@/lib/useReducedMotion';
+import { useI18n } from '@/lib/i18n';
 
-const STAGES = [
-  { icon: DoorOpen, title: 'Entrance', desc: 'Controlled, hygienic entry.' },
-  { icon: Factory, title: 'Production', desc: 'Automated manufacturing lines.' },
-  { icon: ClipboardCheck, title: 'Quality Control', desc: 'In-line inspection & testing.' },
-  { icon: Boxes, title: 'Packaging', desc: 'Precision packing & labelling.' },
-  { icon: Warehouse, title: 'Warehouse', desc: 'Climate-controlled storage.' },
-];
+const STAGE_ICONS = [DoorOpen, Factory, ClipboardCheck, Boxes, Warehouse];
 
 /**
  * 10 — MANUFACTURING. The "camera" travels through the facility: vertical scroll
@@ -22,6 +17,7 @@ export function ManufacturingScene() {
   const root = useRef<HTMLElement>(null);
   const track = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
+  const { m } = useI18n();
 
   useLayoutEffect(() => {
     if (reduced || !root.current || !track.current) return;
@@ -71,16 +67,16 @@ export function ManufacturingScene() {
 
         <div className="relative z-10 mx-auto mb-8 w-full max-w-7xl px-6 sm:px-10">
           <p className="mb-2 text-xs font-semibold uppercase tracking-wider2 text-aqua">
-            10 — Manufacturing
+            {m.manufacturing.eyebrow}
           </p>
           <h2 className="font-display text-4xl font-semibold text-white sm:text-5xl">
-            Travel through our facility
+            {m.manufacturing.title}
           </h2>
         </div>
 
         <div ref={track} className="relative z-10 flex items-center gap-8 px-[10vw] will-change-transform">
-          {STAGES.map((s, i) => {
-            const Icon = s.icon;
+          {m.manufacturing.stages.map((s, i) => {
+            const Icon = STAGE_ICONS[i];
             return (
               <div key={s.title} className="flex items-center gap-8">
                 <article className="flex h-[42vh] w-[72vw] shrink-0 flex-col justify-between rounded-3xl border border-white/12 bg-white/[0.06] p-8 backdrop-blur-sm sm:w-[380px]">
@@ -97,7 +93,7 @@ export function ManufacturingScene() {
                     <p className="mt-2 text-white/65">{s.desc}</p>
                   </div>
                 </article>
-                {i < STAGES.length - 1 && (
+                {i < m.manufacturing.stages.length - 1 && (
                   <span className="hidden h-px w-16 shrink-0 bg-white/20 sm:block" />
                 )}
               </div>

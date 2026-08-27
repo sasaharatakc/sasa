@@ -11,25 +11,20 @@ import {
 } from 'lucide-react';
 import { gsap } from '@/lib/gsap';
 import { useReducedMotion } from '@/lib/useReducedMotion';
+import { useI18n } from '@/lib/i18n';
 
 /**
  * 06 — CAPABILITIES. Horizontal 3D-carousel of manufacturing capabilities and
  * dosage forms. (No fictitious product SKUs — these are ASLE's stated services
  * and standard dosage forms.) Centre card sits forward; neighbours recede.
  */
-const CAPS = [
-  { icon: Tablets, title: 'Tablets', desc: 'Coated, uncoated & sustained-release.' },
-  { icon: Pill, title: 'Capsules', desc: 'Hard & soft-gel formulations.' },
-  { icon: FlaskConical, title: 'Syrups & Liquids', desc: 'Oral suspensions and solutions.' },
-  { icon: Syringe, title: 'Injectables', desc: 'Sterile parenteral preparations.' },
-  { icon: Droplets, title: 'Ointments & Creams', desc: 'Topical & dermatological.' },
-  { icon: Package, title: 'Custom OEM', desc: 'Formulate, pack & brand to spec.' },
-];
+const CAP_ICONS = [Tablets, Pill, FlaskConical, Syringe, Droplets, Package];
 
 export function ProductsScene() {
   const root = useRef<HTMLElement>(null);
   const track = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
+  const { m } = useI18n();
 
   useLayoutEffect(() => {
     if (reduced || !root.current || !track.current) return;
@@ -79,23 +74,20 @@ export function ProductsScene() {
       <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden [perspective:1400px]">
         <div className="mx-auto mb-8 w-full max-w-7xl px-6 sm:px-10">
           <p className="mb-2 text-xs font-semibold uppercase tracking-wider2 text-teal-deep">
-            06 — Manufacturing Capabilities
+            {m.products.eyebrow}
           </p>
           <h2 className="font-display text-4xl font-semibold text-navy sm:text-5xl">
-            What we can make for you
+            {m.products.title}
           </h2>
-          <p className="mt-3 max-w-xl text-navy/65">
-            Third-party &amp; OEM manufacturing across a full range of dosage
-            forms — with no minimum order quantity.
-          </p>
+          <p className="mt-3 max-w-xl text-navy/65">{m.products.lead}</p>
         </div>
 
         <div
           ref={track}
           className="flex items-center gap-6 px-[10vw] will-change-transform sm:gap-10 [transform-style:preserve-3d]"
         >
-          {CAPS.map((c) => {
-            const Icon = c.icon;
+          {m.products.caps.map((c, i) => {
+            const Icon = CAP_ICONS[i];
             return (
               <article
                 key={c.title}

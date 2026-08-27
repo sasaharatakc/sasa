@@ -4,6 +4,7 @@ import { useLayoutEffect, useRef } from 'react';
 import { Microscope, Cpu } from 'lucide-react';
 import { gsap } from '@/lib/gsap';
 import { useReducedMotion } from '@/lib/useReducedMotion';
+import { useI18n } from '@/lib/i18n';
 import { Molecule } from './visuals/Molecule';
 
 /**
@@ -14,6 +15,7 @@ import { Molecule } from './visuals/Molecule';
 export function RnDScene() {
   const root = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
+  const { m } = useI18n();
 
   useLayoutEffect(() => {
     if (reduced || !root.current) return;
@@ -55,7 +57,7 @@ export function RnDScene() {
               <Microscope size={44} strokeWidth={1.4} />
             </div>
             <p className="text-sm font-semibold uppercase tracking-wider2 text-aqua">
-              In the laboratory
+              {m.rnd.lab}
             </p>
           </div>
         </div>
@@ -80,16 +82,12 @@ export function RnDScene() {
           <div className="mx-auto w-full max-w-7xl px-6 pb-16 sm:px-10">
             <div className="max-w-lg rounded-2xl bg-white/85 p-7 backdrop-blur">
               <p className="mb-2 text-xs font-semibold uppercase tracking-wider2 text-teal-deep">
-                08 — Research &amp; Development
+                {m.rnd.eyebrow}
               </p>
               <h2 className="font-display text-3xl font-semibold text-navy sm:text-4xl">
-                Investing in what comes next
+                {m.rnd.title}
               </h2>
-              <p className="mt-3 text-navy/70">
-                Bridging hands-on research with digital science — advancing
-                formulations, processes and technology for the medicines of
-                tomorrow.
-              </p>
+              <p className="mt-3 text-navy/70">{m.rnd.desc}</p>
             </div>
           </div>
         </div>

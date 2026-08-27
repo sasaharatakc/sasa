@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import { gsap } from '@/lib/gsap';
 import { useReducedMotion } from '@/lib/useReducedMotion';
+import { useI18n } from '@/lib/i18n';
 import { Molecule } from './visuals/Molecule';
 
 /**
@@ -13,6 +14,7 @@ import { Molecule } from './visuals/Molecule';
 export function IngredientScene() {
   const root = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
+  const { m } = useI18n();
 
   useLayoutEffect(() => {
     if (reduced || !root.current) return;
@@ -91,27 +93,24 @@ export function IngredientScene() {
         >
           <div className="max-w-md">
             <p className="mb-3 text-xs font-semibold uppercase tracking-wider2 text-teal-deep">
-              03 — Ingredients
+              {m.ingredients.eyebrow}
             </p>
             <h2 className="font-display text-4xl font-semibold leading-tight text-navy sm:text-5xl">
-              The science of the active molecule
+              {m.ingredients.title}
             </h2>
-            <p className="mt-5 text-lg text-navy/70">
-              Rigorous formulation and analytical control turn active ingredients
-              into medicines that perform — reliably, batch after batch.
-            </p>
+            <p className="mt-5 text-lg text-navy/70">{m.ingredients.lead}</p>
             <ul className="mt-6 space-y-2 text-navy/75">
               <li className="flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-teal" />
-                Cutting-edge formulation technologies
+                {m.ingredients.c1}
               </li>
               <li className="flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-teal" />
-                Rigorous quality control at every stage
+                {m.ingredients.c2}
               </li>
               <li className="flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-teal" />
-                Consistent, reproducible results
+                {m.ingredients.c3}
               </li>
             </ul>
           </div>

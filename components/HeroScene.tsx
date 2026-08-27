@@ -4,6 +4,7 @@ import { useLayoutEffect, useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { gsap } from '@/lib/gsap';
 import { useReducedMotion } from '@/lib/useReducedMotion';
+import { useI18n } from '@/lib/i18n';
 import { Capsule } from './visuals/Capsule';
 
 /**
@@ -14,6 +15,7 @@ import { Capsule } from './visuals/Capsule';
 export function HeroScene() {
   const root = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
+  const { m } = useI18n();
 
   useLayoutEffect(() => {
     if (reduced || !root.current) return;
@@ -84,30 +86,26 @@ export function HeroScene() {
           {/* Copy */}
           <div data-hero="copy" className="max-w-xl">
             <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-teal/20 bg-white/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider2 text-teal-deep backdrop-blur">
-              Scroll to discover ASLE
+              {m.hero.badge}
             </p>
             <h1 className="font-display text-5xl font-semibold leading-[1.02] text-navy sm:text-6xl lg:text-7xl">
-              Better Medicines.
+              {m.hero.title1}
               <br />
-              <span className="text-teal">Better Lives.</span>
+              <span className="text-teal">{m.hero.title2}</span>
             </h1>
-            <p className="mt-6 max-w-md text-lg text-navy/70">
-              Innovating for a healthier tomorrow — third-party &amp; OEM
-              pharmaceutical manufacturing, quality-assured and delivered across
-              the globe.
-            </p>
+            <p className="mt-6 max-w-md text-lg text-navy/70">{m.hero.sub}</p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <a
                 href="#delivery"
                 className="rounded-full bg-teal px-7 py-3 text-sm font-semibold text-white shadow-md transition-all hover:bg-teal-deep"
               >
-                Partner With Us
+                {m.hero.cta}
               </a>
               <a
                 href="#capsule"
                 className="text-sm font-semibold text-teal-deep underline-offset-4 hover:underline"
               >
-                Explore our world →
+                {m.hero.explore}
               </a>
             </div>
           </div>
@@ -130,7 +128,7 @@ export function HeroScene() {
           className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1 text-teal-deep"
         >
           <span className="text-[10px] font-semibold uppercase tracking-wider3">
-            Scroll Down
+            {m.hero.scroll}
           </span>
           <ChevronDown className="animate-bounce" size={18} />
         </div>

@@ -1,36 +1,33 @@
 'use client';
 
 import { Users, ShieldCheck, HeartHandshake, Globe, Leaf } from 'lucide-react';
+import { useI18n } from '@/lib/i18n';
 import { MotionText } from './MotionText';
 
-const VALUES = [
-  { icon: Users, title: 'Patient Centric', jp: '患者中心の考え方' },
-  { icon: ShieldCheck, title: 'Quality First', jp: '品質を最優先' },
-  { icon: HeartHandshake, title: 'Affordable Healthcare', jp: '手頃で価値ある医療' },
-  { icon: Globe, title: 'Global Presence', jp: '世界への展開' },
-  { icon: Leaf, title: 'Sustainable Future', jp: '持続可能な未来へ' },
-];
+const VALUE_ICONS = [Users, ShieldCheck, HeartHandshake, Globe, Leaf];
 
 /**
  * 12 — WHY ASLE. After the intensity of the journey, the site settles. Minimal
  * motion (gentle reveals only) creates the closing "calm" beat of the rhythm.
  */
 export function FinalValues() {
+  const { m } = useI18n();
+
   return (
     <section id="why" className="relative bg-white py-28">
       <div className="mx-auto max-w-7xl px-6 sm:px-10">
         <MotionText className="mx-auto max-w-2xl text-center">
           <p className="mb-3 text-xs font-semibold uppercase tracking-wider2 text-teal-deep">
-            Why ASLE Pharmaceuticals?
+            {m.why.eyebrow}
           </p>
           <h2 className="font-display text-4xl font-semibold text-navy sm:text-5xl">
-            The principles behind our work
+            {m.why.title}
           </h2>
         </MotionText>
 
         <div className="mt-16 grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-3 lg:grid-cols-5">
-          {VALUES.map((v, i) => {
-            const Icon = v.icon;
+          {m.why.values.map((v, i) => {
+            const Icon = VALUE_ICONS[i];
             return (
               <MotionText
                 key={v.title}
@@ -42,7 +39,7 @@ export function FinalValues() {
                   <Icon size={30} strokeWidth={1.5} />
                 </div>
                 <h3 className="font-semibold text-navy">{v.title}</h3>
-                <p className="mt-1 text-sm text-navy/55">{v.jp}</p>
+                <p className="mt-1 text-sm text-navy/55">{v.sub}</p>
               </MotionText>
             );
           })}

@@ -2,11 +2,22 @@
 
 import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import { NAV_LINKS } from '@/lib/sections';
+import { useI18n } from '@/lib/i18n';
+import { LanguageToggle } from './LanguageToggle';
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { m } = useI18n();
+
+  const links = [
+    { href: '#capsule', label: m.nav.about },
+    { href: '#products', label: m.nav.capabilities },
+    { href: '#therapeutic', label: m.nav.therapeutic },
+    { href: '#rnd', label: m.nav.rnd },
+    { href: '#quality', label: m.nav.quality },
+    { href: '#why', label: m.nav.why },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -31,13 +42,13 @@ export function Navigation() {
               ASLE
             </span>
             <span className="text-[9px] font-medium uppercase tracking-wider3 text-teal-deep">
-              Pharmaceuticals
+              {m.nav.pharma}
             </span>
           </span>
         </a>
 
         <ul className="hidden items-center gap-7 lg:flex">
-          {NAV_LINKS.map((link) => (
+          {links.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
@@ -49,16 +60,17 @@ export function Navigation() {
           ))}
         </ul>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <LanguageToggle />
           <a
             href="#delivery"
-            className="hidden rounded-full bg-teal px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-teal-deep hover:shadow-md sm:inline-flex"
+            className="hidden rounded-full bg-teal px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-teal-deep hover:shadow-md lg:inline-flex"
           >
-            Partner With Us
+            {m.nav.partner}
           </a>
           <button
             type="button"
-            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-label={open ? m.nav.menu : m.nav.menu}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
             className="inline-flex h-10 w-10 items-center justify-center rounded-full text-navy lg:hidden"
@@ -72,7 +84,7 @@ export function Navigation() {
       {open && (
         <div className="border-t border-teal/10 bg-white/95 backdrop-blur-md lg:hidden">
           <ul className="flex flex-col px-5 py-3">
-            {NAV_LINKS.map((link) => (
+            {links.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
@@ -89,7 +101,7 @@ export function Navigation() {
                 onClick={() => setOpen(false)}
                 className="mt-2 inline-flex rounded-full bg-teal px-5 py-2.5 text-sm font-semibold text-white"
               >
-                Partner With Us
+                {m.nav.partner}
               </a>
             </li>
           </ul>

@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import { gsap } from '@/lib/gsap';
 import { useReducedMotion } from '@/lib/useReducedMotion';
+import { useI18n } from '@/lib/i18n';
 import { Molecule } from './visuals/Molecule';
 import { HumanSilhouette } from './visuals/HumanSilhouette';
 
@@ -14,6 +15,7 @@ import { HumanSilhouette } from './visuals/HumanSilhouette';
 export function HumanScene() {
   const root = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
+  const { m } = useI18n();
 
   useLayoutEffect(() => {
     if (reduced || !root.current) return;
@@ -87,15 +89,12 @@ export function HumanScene() {
           className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-start px-6 sm:px-10"
         >
           <p className="mb-3 text-xs font-semibold uppercase tracking-wider2 text-teal-deep">
-            04 — To the human body
+            {m.human.eyebrow}
           </p>
           <h2 className="max-w-md font-display text-4xl font-semibold leading-tight text-navy sm:text-5xl">
-            From science to healthcare
+            {m.human.title}
           </h2>
-          <p className="mt-5 max-w-sm text-lg text-navy/70">
-            Medicine, absorbed and at work — supporting health and improving
-            lives. This is the purpose behind everything we manufacture.
-          </p>
+          <p className="mt-5 max-w-sm text-lg text-navy/70">{m.human.lead}</p>
         </div>
       </div>
     </section>

@@ -1,3 +1,4 @@
+import { I18nProvider } from '@/lib/i18n';
 import { SmoothScroll } from '@/lib/SmoothScroll';
 import { Navigation } from '@/components/Navigation';
 import { ScrollProgress } from '@/components/ScrollProgress';
@@ -17,7 +18,8 @@ import { Footer } from '@/components/Footer';
 
 export default function Home() {
   return (
-    <SmoothScroll>
+    <I18nProvider>
+      <SmoothScroll>
       <Navigation />
       <ScrollProgress />
       <main>
@@ -42,6 +44,7 @@ export default function Home() {
         <FinalValues />
       </main>
       <Footer />
-    </SmoothScroll>
+      </SmoothScroll>
+    </I18nProvider>
   );
 }

@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import { gsap } from '@/lib/gsap';
 import { useReducedMotion } from '@/lib/useReducedMotion';
+import { useI18n } from '@/lib/i18n';
 
 /**
  * 09 — GLOBAL PARTNERSHIP. A conceptual global network: connection arcs radiate
@@ -12,6 +13,7 @@ import { useReducedMotion } from '@/lib/useReducedMotion';
 export function GlobalScene() {
   const root = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
+  const { m } = useI18n();
 
   // Hub at centre; conceptual outbound nodes.
   const hub = { x: 300, y: 260 };
@@ -67,16 +69,12 @@ export function GlobalScene() {
         <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-6 sm:px-10 lg:grid-cols-2">
           <div data-global="copy">
             <p className="mb-3 text-xs font-semibold uppercase tracking-wider2 text-teal-deep">
-              09 — Global Partnership
+              {m.global.eyebrow}
             </p>
             <h2 className="font-display text-4xl font-semibold leading-tight text-navy sm:text-5xl">
-              A network that reaches the world
+              {m.global.title}
             </h2>
-            <p className="mt-5 max-w-md text-lg text-navy/70">
-              From our base in Jaipur, India, ASLE builds international
-              collaborations — supplying partners worldwide through global export
-              and drop-shipping.
-            </p>
+            <p className="mt-5 max-w-md text-lg text-navy/70">{m.global.lead}</p>
           </div>
 
           <div className="flex justify-center">
