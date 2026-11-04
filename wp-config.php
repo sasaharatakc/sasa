@@ -16,6 +16,7 @@ define('SECURE_AUTH_SALT', getenv('WP_SECURE_AUTH_SALT') ?: 'dev-only-change-sec
 define('LOGGED_IN_SALT', getenv('WP_LOGGED_IN_SALT') ?: 'dev-only-change-login-salt');
 define('NONCE_SALT', getenv('WP_NONCE_SALT') ?: 'dev-only-change-nonce-salt');
 $table_prefix = 'wp_';
+define('WP_ENVIRONMENT_TYPE', 'staging');
 define('WP_DEBUG', false);
 define('DISALLOW_FILE_EDIT', true);
 if (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && str_contains($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https')) $_SERVER['HTTPS'] = 'on';
