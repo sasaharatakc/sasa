@@ -1,0 +1,23 @@
+<?php
+define('DB_NAME', 'wordpress');
+define('DB_USER', 'unused');
+define('DB_PASSWORD', 'unused');
+define('DB_HOST', 'localhost');
+define('DB_CHARSET', 'utf8');
+define('DB_COLLATE', '');
+define('DB_DIR', __DIR__ . '/wp-content/database/');
+define('DB_FILE', '.ht.sqlite');
+define('AUTH_KEY', getenv('WP_AUTH_KEY') ?: 'dev-only-change-auth-key');
+define('SECURE_AUTH_KEY', getenv('WP_SECURE_AUTH_KEY') ?: 'dev-only-change-secure-key');
+define('LOGGED_IN_KEY', getenv('WP_LOGGED_IN_KEY') ?: 'dev-only-change-login-key');
+define('NONCE_KEY', getenv('WP_NONCE_KEY') ?: 'dev-only-change-nonce-key');
+define('AUTH_SALT', getenv('WP_AUTH_SALT') ?: 'dev-only-change-auth-salt');
+define('SECURE_AUTH_SALT', getenv('WP_SECURE_AUTH_SALT') ?: 'dev-only-change-secure-salt');
+define('LOGGED_IN_SALT', getenv('WP_LOGGED_IN_SALT') ?: 'dev-only-change-login-salt');
+define('NONCE_SALT', getenv('WP_NONCE_SALT') ?: 'dev-only-change-nonce-salt');
+$table_prefix = 'wp_';
+define('WP_DEBUG', false);
+define('DISALLOW_FILE_EDIT', true);
+if (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && str_contains($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https')) $_SERVER['HTTPS'] = 'on';
+if (!defined('ABSPATH')) define('ABSPATH', __DIR__ . '/');
+require_once ABSPATH . 'wp-settings.php';
